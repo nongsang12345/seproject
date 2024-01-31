@@ -4,7 +4,7 @@ import React from 'react';
 const Header = () => {
   return (
     <header style={{ backgroundColor: 'lightgray', padding: '10px' }}>
-      <h1>KU KASETSART </h1>
+      <h1>KU </h1>
     </header>
   );
 };
