@@ -1,49 +1,46 @@
-import React from 'react';
+import { useState, useEffect } from 'react'
+import reactLogo from './assets/react.svg'
+import viteLogo from '/vite.svg'
+import './App.css'
+import { GoogleLogin } from 'react-google-login'
+import { gapi } from 'gapi-script'
 
-// Header component
-const Header = () => {
+function App() {
+  const [count, setCount] = useState(0)
+
+  const clientId = "989605622776-ue6e395jnkt84309ub3a5b83pg7svq28.apps.googleusercontent.com"
+  
+  useEffect(() => {
+    const initClient = () => {
+      gapi.client.init({
+        clientId: clientId,
+        scope: ''
+      })
+    }
+    gapi.load("client:auth2",initClient)
+
+  }, [])
+
+  const onSuccess = (res) => {
+    console.log('success',res)
+  }
+
+  const onFailure = (res) => {
+    console.log('failed',res)
+  }
+
+
   return (
-    <header style={{ backgroundColor: 'lightgray', padding: '10px' }}>
-      <h1>KU </h1>
-    </header>
-  );
-};
+    <GoogleLogin
+      clientId={clientId}
+      buttonText="Sight in with Google"
+      onSuccess={onSuccess}
+      onFailure={onFailure}
+      cookiePolicy={'single_host_origin'}
+      isSignedIn={true}
+    />
+      
+  )
+}
 
-// Menu component
-const Menu = () => {
-  return (
-    <nav style={{ backgroundColor: 'darkgray', padding: '10px' }}>
-      <ul style={{ listStyleType: 'none', display: 'flex' }}>
-        <li style={{ marginRight: '10px' }}>
-          <a href="/web">Home</a>
-        </li>
-        <li style={{ marginRight: '10px' }}>
-          <a href="/news">News</a>
-        </li>
-        <li style={{ marginRight: '10px' }}>
-          <a href="/courses">Courses</a>
-        </li>
-        <li style={{ marginRight: '10px' }}>
-          <a href="/about">About</a>
-        </li>
-      </ul>
-    </nav>
-  );
-};
-
-// Main component that uses Header and Menu
-const App = () => {
-  return (
-    <div>
-      <Header />
-      <Menu />
-      {/* Other components or content */}
-    </div>
-  );
-};
-
-//test first commit by teardrop//
-
-//test 2//
-
-export default App;
+export default App
