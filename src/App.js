@@ -1,12 +1,10 @@
-
 import React from 'react';
-import Importcourse from './Importcourse';
+import Mainlayout from './layout/Mainlayout';
 
-const App = () => {
+function App() {
   return (
     <div>
-      <Importcourse />
-      {/* The rest of your website content goes here */}
+      <Mainlayout></Mainlayout>
     </div>
   );
 };
